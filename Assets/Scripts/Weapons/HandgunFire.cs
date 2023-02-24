@@ -8,17 +8,24 @@ public class HandgunFire : MonoBehaviour
    [SerializeField] private GameObject muzzleFlash;
    [SerializeField] private AudioSource gunFire;
    [SerializeField] private bool isFiring = false;
+   [SerializeField] private AudioSource emptyAmmoSound;
 
     // Update is called once per frame
     void Update(){
         if(Input.GetButtonDown("Fire1")){
-            if(!isFiring)
-                StartCoroutine(FiringHandgun());
+            if(GlobalAmmo.handgunAmmo < 1){
+                emptyAmmoSound.Play();
+            }else{
+                if(!isFiring)
+                    StartCoroutine(FiringHandgun());
+            }
+            
         }
     }
 
     IEnumerator FiringHandgun(){
         isFiring = true;
+        GlobalAmmo.handgunAmmo -= 1;
         theGun.GetComponent<Animator>().Play("handgunFire");
         muzzleFlash.SetActive(true);
         gunFire.Play();
