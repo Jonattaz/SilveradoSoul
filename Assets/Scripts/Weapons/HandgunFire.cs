@@ -9,6 +9,8 @@ public class HandgunFire : MonoBehaviour
    [SerializeField] private AudioSource gunFire;
    [SerializeField] private bool isFiring = false;
    [SerializeField] private AudioSource emptyAmmoSound;
+   
+   [SerializeField] private bool readyToKill = false;
 
     // Update is called once per frame
     void Update(){
@@ -42,6 +44,8 @@ public class HandgunFire : MonoBehaviour
 
         if(Input.GetButton("Fire2")){
             theGun.GetComponent<Animator>().Play("handgunAim");
+        }else{
+            theGun.GetComponent<Animator>().Play("Default");
         }
     }
 }
