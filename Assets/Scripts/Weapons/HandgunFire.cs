@@ -12,29 +12,36 @@ public class HandgunFire : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(Input.GetButtonDown("Fire1")){
-            if(GlobalAmmo.handgunAmmo < 1){
-                emptyAmmoSound.Play();
-            }else{
-                if(!isFiring)
-                    StartCoroutine(FiringHandgun());
-            }
-            
-        }
+        HandgunInput();
     }
 
     IEnumerator FiringHandgun(){
         isFiring = true;
         GlobalAmmo.handgunAmmo -= 1;
-        theGun.GetComponent<Animator>().Play("handgunFire");
-        muzzleFlash.SetActive(true);
+        theGun.GetComponent<Animator>().Play("handgunFire", -1, 0f);
+        muzzleFlash.SetActive(true); 
         gunFire.Play();
         yield return new WaitForSeconds(0.05f);
         muzzleFlash.SetActive(false);
         yield return new WaitForSeconds(0.25f);
-        theGun.GetComponent<Animator>().Play("Default");
         isFiring = false;
 
     }
 
+    private void HandgunInput(){
+        if(Input.GetButtonDown("Fire1")){
+            if(GlobalAmmo.handgunAmmo < 1){
+                theGun.GetComponent<Animator>().Play("Default");
+                emptyAmmoSound.Play();
+            }else{
+                if(!isFiring){
+                    StartCoroutine(FiringHandgun());
+                } 
+            }    
+        }
+
+        if(Input.GetButton("Fire2")){
+            theGun.GetComponent<Animator>().Play("handgunAim");
+        }
+    }
 }
