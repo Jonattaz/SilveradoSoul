@@ -14,13 +14,30 @@ public class RiflePickup : MonoBehaviour
     [SerializeField]
     GameObject pickupDisplay;
 
+    public static bool rifleCollected;
+  
+
     void OnTriggerEnter(Collider other){
-        realRifle.SetActive(true);
-        fakeRifle.SetActive(false);
-        riflePickupSound.Play();
-        GetComponent<BoxCollider>().enabled = false;
-        pickupDisplay.SetActive(false);
-        pickupDisplay.GetComponent<Text>().text = "RIFLE";
-        pickupDisplay.SetActive(true);
+        rifleCollected = true;
+        
+        if(WeaponController.handgunEquiped){
+            fakeRifle.SetActive(false);
+            riflePickupSound.Play();
+            GetComponent<BoxCollider>().enabled = false;
+            pickupDisplay.SetActive(false);
+            pickupDisplay.GetComponent<Text>().text = "RIFLE";
+            pickupDisplay.SetActive(true);    
+
+        }else{
+            WeaponController.rifleEquiped = true;        
+            realRifle.SetActive(true);
+            fakeRifle.SetActive(false);
+            riflePickupSound.Play();
+            GetComponent<BoxCollider>().enabled = false;
+            pickupDisplay.SetActive(false);
+            pickupDisplay.GetComponent<Text>().text = "RIFLE";
+            pickupDisplay.SetActive(true);
+        }
+      
     }
 }

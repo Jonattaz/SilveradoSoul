@@ -13,14 +13,31 @@ public class HandgunPickup : MonoBehaviour
     AudioSource handgunPickupSound;
     [SerializeField]
     GameObject pickupDisplay;
-
+    public static bool handgunCollected;
+    
     void OnTriggerEnter(Collider other){
-        realHandgun.SetActive(true);
-        fakeHandgun.SetActive(false);
-        handgunPickupSound.Play();
-        GetComponent<BoxCollider>().enabled = false;
-        pickupDisplay.SetActive(false);
-        pickupDisplay.GetComponent<Text>().text = "HANDGUN";
-        pickupDisplay.SetActive(true);
+        handgunCollected = true;
+       
+        if(WeaponController.rifleEquiped){
+            fakeHandgun.SetActive(false);
+            handgunPickupSound.Play();
+            GetComponent<BoxCollider>().enabled = false;
+            pickupDisplay.SetActive(false);
+            pickupDisplay.GetComponent<Text>().text = "HANDGUN";
+            pickupDisplay.SetActive(true);
+
+        
+        }else{
+            WeaponController.handgunEquiped = true;
+            realHandgun.SetActive(true);
+            fakeHandgun.SetActive(false);
+            handgunPickupSound.Play();
+            GetComponent<BoxCollider>().enabled = false;
+            pickupDisplay.SetActive(false);
+            pickupDisplay.GetComponent<Text>().text = "HANDGUN";
+            pickupDisplay.SetActive(true);
+        }
+           
+            
     }
 }
