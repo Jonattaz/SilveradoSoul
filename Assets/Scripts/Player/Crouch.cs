@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Crouch : MonoBehaviour
 {   
@@ -18,5 +19,10 @@ public class Crouch : MonoBehaviour
         }else{
             characterController.height = 1.8f;
         }
+
+         if(Input.GetKey(KeyCode.Escape)){
+            Debug.Log("Saiu");
+            SceneManager.LoadScene("Menu");
+        } 
     }
 }

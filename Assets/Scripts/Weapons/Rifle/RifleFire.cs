@@ -9,6 +9,7 @@ public class RifleFire : MonoBehaviour
    [SerializeField] private AudioSource gunFire;
    [SerializeField] private bool isFiring = false;
    [SerializeField] private AudioSource emptyAmmoSound;
+   private bool isAiming = false;
 
     // Update is called once per frame
     void Update(){
@@ -36,11 +37,15 @@ public class RifleFire : MonoBehaviour
     }
 
     private void RifleInput(){
-        #if UNITY_EDITOR
-            if(Input.GetButtonDown("Fire1")){
+        
+        // Para testar o riffle usando apenas teclas
+        /* #if UNITY_EDITOR
+            if(Input.GetKeyDown(KeyCode.K) && isAiming){
                 if(GlobalAmmo.ammo < 1){
                     theGun.GetComponent<Animator>().Play("Default");
+                    isAiming = false;
                     emptyAmmoSound.Play();
+
                     StartCoroutine(ReloadingRifle());
                 }else{
                     if(!isFiring){
@@ -48,24 +53,37 @@ public class RifleFire : MonoBehaviour
                     } 
                 }    
             }
-        #endif
 
+            if(Input.GetKey(KeyCode.J)){
+                theGun.GetComponent<Animator>().Play("rifleAim");
+                isAiming = true;
+            }else{
+                theGun.GetComponent<Animator>().Play("Default");
+                isAiming = false;
+            }
+       
+        #endif */
+
+        if(Input.GetButtonDown("Fire1") && isAiming){
+                if(GlobalAmmo.ammo < 1){
+                    theGun.GetComponent<Animator>().Play("Default");
+                    isAiming = false;
+                    emptyAmmoSound.Play();
+
+                    StartCoroutine(ReloadingRifle());
+                }else{
+                    if(!isFiring){
+                        StartCoroutine(FiringRifle());
+                    } 
+                }    
+            }
 
         if(Input.GetButton("Fire2")){
             theGun.GetComponent<Animator>().Play("rifleAim");
-            if(Input.GetButtonDown("Fire1")){
-                if(GlobalAmmo.ammo < 1){
-                    theGun.GetComponent<Animator>().Play("Default");
-                    emptyAmmoSound.Play();
-                    StartCoroutine(ReloadingRifle());
-                }else{
-                    if(!isFiring){
-                        StartCoroutine(FiringRifle());
-                    } 
-                }    
-            }
+            isAiming = true;
         }else{
             theGun.GetComponent<Animator>().Play("Default");
+            isAiming = false;
         }
     }
 }

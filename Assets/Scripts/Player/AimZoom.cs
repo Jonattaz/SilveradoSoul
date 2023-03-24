@@ -16,6 +16,21 @@ public class AimZoom : MonoBehaviour
     }
 
     private void ZoomController(){
+        
+        // Para testar o zoom usando apenas teclas 
+        /*#if UNITY_EDITOR
+            if(Input.GetKeyDown(KeyCode.J)){
+                isZoomed = !isZoomed;
+            }
+
+            if(Input.GetKeyUp(KeyCode.J)){
+                isZoomed = !notZoomed;
+            }
+                
+        #endif */
+
+        
+        
         if (Input.GetButtonDown("Fire2"))
         {
             isZoomed = !isZoomed;

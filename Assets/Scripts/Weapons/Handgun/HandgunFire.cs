@@ -36,11 +36,34 @@ public class HandgunFire : MonoBehaviour
     }
 
     private void HandgunInput(){
-        if(Input.GetButtonDown("Fire1")){
+        
+        // Para testar o tiro usando apenas teclas 
+        /* #if UNITY_EDITOR
+           if(Input.GetKeyDown(KeyCode.K)){
+                if(GlobalAmmo.ammo < 1){
+                    theGun.GetComponent<Animator>().Play("Default");
+                    emptyAmmoSound.Play();
+                    StartCoroutine(ReloadingHandgun());
+                }else{
+                    if(!isFiring){
+                        StartCoroutine(FiringHandgun());
+                    } 
+                }    
+            }
+
+            if(Input.GetKey(KeyCode.J)){
+                theGun.GetComponent<Animator>().Play("handgunAim");
+            }else{
+                theGun.GetComponent<Animator>().Play("Default");
+            }
+        #endif */
+
+
+       if(Input.GetButtonDown("Fire1")){
             if(GlobalAmmo.ammo < 1){
                 theGun.GetComponent<Animator>().Play("Default");
                 emptyAmmoSound.Play();
-                StartCoroutine("ReloadingHandgun");
+                StartCoroutine(ReloadingHandgun());
             }else{
                 if(!isFiring){
                     StartCoroutine(FiringHandgun());
