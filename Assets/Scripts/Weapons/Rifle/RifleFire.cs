@@ -18,7 +18,7 @@ public class RifleFire : MonoBehaviour
     IEnumerator FiringRifle(){
         isFiring = true;
         GlobalAmmo.ammo -= 1;
-        //theGun.GetComponent<Animator>().Play("rifleFire", -1, 0f);
+        theGun.GetComponent<Animator>().Play("rifleFire", -1, 0f);
         muzzleFlash.SetActive(true); 
         gunFire.Play();
         yield return new WaitForSeconds(0.05f);
@@ -36,22 +36,36 @@ public class RifleFire : MonoBehaviour
     }
 
     private void RifleInput(){
-        if(Input.GetButtonDown("Fire1")){
-            if(GlobalAmmo.ammo < 1){
-                //theGun.GetComponent<Animator>().Play("Default");
-                emptyAmmoSound.Play();
-                StartCoroutine(ReloadingRifle());
-            }else{
-                if(!isFiring){
-                    StartCoroutine(FiringRifle());
-                } 
-            }    
-        }
+        #if UNITY_EDITOR
+            if(Input.GetButtonDown("Fire1")){
+                if(GlobalAmmo.ammo < 1){
+                    theGun.GetComponent<Animator>().Play("Default");
+                    emptyAmmoSound.Play();
+                    StartCoroutine(ReloadingRifle());
+                }else{
+                    if(!isFiring){
+                        StartCoroutine(FiringRifle());
+                    } 
+                }    
+            }
+        #endif
+
 
         if(Input.GetButton("Fire2")){
-            //theGun.GetComponent<Animator>().Play("rifleAim");
+            theGun.GetComponent<Animator>().Play("rifleAim");
+            if(Input.GetButtonDown("Fire1")){
+                if(GlobalAmmo.ammo < 1){
+                    theGun.GetComponent<Animator>().Play("Default");
+                    emptyAmmoSound.Play();
+                    StartCoroutine(ReloadingRifle());
+                }else{
+                    if(!isFiring){
+                        StartCoroutine(FiringRifle());
+                    } 
+                }    
+            }
         }else{
-            //theGun.GetComponent<Animator>().Play("Default");
+            theGun.GetComponent<Animator>().Play("Default");
         }
     }
 }
