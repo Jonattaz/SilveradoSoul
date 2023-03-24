@@ -4934,6 +4934,21 @@ MonoBehaviour:
   leanRight: {fileID: 2145916897}
   idle: {fileID: 509321445}
   lerpTime: 0.15
+--- !u!114 &1287101981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287101976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13dc0cdff0856b148a9fa375f3a821ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoom: 20
+  normal: 60
+  smooth: 1
 --- !u!1 &1291007720
 GameObject:
   m_ObjectHideFlags: 0
