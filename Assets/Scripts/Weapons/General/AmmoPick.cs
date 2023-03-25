@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HandgunAmmoPick : MonoBehaviour
+public class AmmoPick : MonoBehaviour
 {
    
     [SerializeField]
@@ -19,7 +19,7 @@ public class HandgunAmmoPick : MonoBehaviour
         ammoPickupSound.Play();
         GlobalAmmo.ammo += 10;
         pickupDisplay.SetActive(false);
-        pickupDisplay.GetComponent<Text>().text = "CLIP OF BULLETS";
+        pickupDisplay.GetComponent<Text>().text = "CLIPE DE BALAS";
         pickupDisplay.SetActive(true);
     }
 

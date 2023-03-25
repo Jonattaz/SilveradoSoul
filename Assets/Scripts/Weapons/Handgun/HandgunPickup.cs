@@ -23,7 +23,7 @@ public class HandgunPickup : MonoBehaviour
             handgunPickupSound.Play();
             GetComponent<BoxCollider>().enabled = false;
             pickupDisplay.SetActive(false);
-            pickupDisplay.GetComponent<Text>().text = "HANDGUN";
+            pickupDisplay.GetComponent<Text>().text = "BERETTA M9";
             pickupDisplay.SetActive(true);
 
         
@@ -34,7 +34,7 @@ public class HandgunPickup : MonoBehaviour
             handgunPickupSound.Play();
             GetComponent<BoxCollider>().enabled = false;
             pickupDisplay.SetActive(false);
-            pickupDisplay.GetComponent<Text>().text = "HANDGUN";
+            pickupDisplay.GetComponent<Text>().text = "BERETTA M9";
             pickupDisplay.SetActive(true);
         }
            
