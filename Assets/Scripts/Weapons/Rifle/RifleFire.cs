@@ -11,6 +11,11 @@ public class RifleFire : MonoBehaviour
    [SerializeField] private AudioSource emptyAmmoSound;
    private bool isAiming = false;
 
+   [Header("Bullet Properties")]
+   [SerializeField] private Transform bulletSpawnPoint;
+   [SerializeField] private GameObject bulletPrefab;
+   [SerializeField] private float bulletSpeed;
+
     // Update is called once per frame
     void Update(){
         RifleInput();
@@ -22,6 +27,8 @@ public class RifleFire : MonoBehaviour
         theGun.GetComponent<Animator>().Play("rifleFire", -1, 0f);
         muzzleFlash.SetActive(true); 
         gunFire.Play();
+        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
         yield return new WaitForSeconds(0.05f);
         muzzleFlash.SetActive(false);
         yield return new WaitForSeconds(0.25f);
