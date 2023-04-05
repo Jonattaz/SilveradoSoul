@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class RifleFire : MonoBehaviour
 {
-   [SerializeField] private GameObject theGun;
-   [SerializeField] private GameObject muzzleFlash;
-   [SerializeField] private AudioSource gunFire;
-   [SerializeField] private bool isFiring = false;
-   [SerializeField] private AudioSource emptyAmmoSound;
-   private bool isAiming = false;
+    [SerializeField] private GameObject theGun;
+    [SerializeField] private GameObject muzzleFlash;
+    [SerializeField] private AudioSource gunFire;
+    [SerializeField] private bool isFiring = false;
+    [SerializeField] private AudioSource emptyAmmoSound;
+    private bool isAiming = false;
 
-   [Header("Bullet Properties")]
-   [SerializeField] private Transform bulletSpawnPoint;
-   [SerializeField] private GameObject bulletPrefab;
-   [SerializeField] private float bulletSpeed;
+    [Header("Bullet Properties")]
+    [SerializeField] private GameObject impactEffect;
+    [SerializeField] private int rifleDamage = 30;
+    private RaycastHit hit;
+    private Ray ray;
 
     // Update is called once per frame
     void Update(){
@@ -27,8 +28,17 @@ public class RifleFire : MonoBehaviour
         theGun.GetComponent<Animator>().Play("rifleFire", -1, 0f);
         muzzleFlash.SetActive(true); 
         gunFire.Play();
-        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
+       
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity)){
+            GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject;
+             Destroy(impactEffectGO, 3);
+            if(hit.collider.gameObject.tag == "Enemy"){
+                AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
+                enemy.TakeDamage(rifleDamage);
+                // Tocar som de acerto
+            }
+        }
+
         yield return new WaitForSeconds(0.05f);
         muzzleFlash.SetActive(false);
         yield return new WaitForSeconds(0.25f);

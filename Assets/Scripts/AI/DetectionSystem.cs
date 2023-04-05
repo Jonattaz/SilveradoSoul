@@ -33,7 +33,7 @@ namespace PudimdimGames{
 
         void IconChanger(){
 
-            stateHolder = aiLocal.GetComponent<AI_Enemy>().stateText;
+            //stateHolder = aiLocal.GetComponent<AI_Enemy>().stateText;
 
             switch (stateHolder)
             {

@@ -9,14 +9,18 @@ public class HandgunFire : MonoBehaviour
     [SerializeField] private AudioSource gunFire;
     [SerializeField] private bool isFiring = false;
     [SerializeField] private AudioSource emptyAmmoSound;
-
+    
     [Header("Bullet Properties")]
-    [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float bulletSpeed;
+    [SerializeField] private GameObject impactEffect;
+    [SerializeField] private int handgunDamage = 10;
+    private RaycastHit hit;
+    private Ray ray;
+
+
 
     // Update is called once per frame
     void Update(){
+        ray = Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0));
         HandgunInput();
     }
 
@@ -24,8 +28,16 @@ public class HandgunFire : MonoBehaviour
         isFiring = true;
         GlobalAmmo.ammo -= 1;
         theGun.GetComponent<Animator>().Play("handgunFire", -1, 0f);
-        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
+        
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity)){
+            GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject;
+             Destroy(impactEffectGO, 5);
+            if(hit.collider.gameObject.tag == "Enemy"){
+                AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
+                enemy.TakeDamage(handgunDamage);
+            }
+        }
+
         muzzleFlash.SetActive(true); 
         gunFire.Play();
         yield return new WaitForSeconds(0.05f);
