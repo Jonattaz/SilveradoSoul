@@ -30,8 +30,14 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private float fieldOfViewAngle;
     // Line Of Sight(LOS)
     [SerializeField] private float lOSRadius;
-    [SerializeField] private float shootingDistance;
      [SerializeField] private bool playerIsInLOS = false;
+
+    [Header("Shooting Settings")]
+    [SerializeField] private AudioSource gunFire;
+    [SerializeField] private string hitTag;
+    [SerializeField] private Camera shootingRaycastArea;
+    [SerializeField] private float shootingDistance;
+    private RaycastHit hit;
 
 
     /// Awake is called when the script instance is being loaded.
@@ -53,10 +59,10 @@ public class AI_Enemy : MonoBehaviour{
     void Update(){
         distance = Vector3.Distance(playerPositionReference.position, transform.position);
         anim.SetFloat("Speed", nav.speed);
-            
-        if(!isShooting){              
-            if(nav.isActiveAndEnabled && canMove){
-                 CheckLOS();
+                        
+        if(nav.isActiveAndEnabled){
+            CheckLOS();
+            if(!isShooting && canMove){
                 if(playerIsInLOS == false){
                     Patrol();
                 }else if(playerIsInLOS == true){
@@ -65,27 +71,33 @@ public class AI_Enemy : MonoBehaviour{
                     ChasePlayer();
                 }
             }else{
-                nav.speed = idleSpeed;
+                ShootPlayer();
             }
         }
     }
-
+    
     void StateController(){
         
     }
 
     // Check Line Of Sight
     void CheckLOS(){
-        Vector3 direction = Crouch.playerPos - transform.position;
+        Vector3 direction = playerPositionReference.position - transform.position;
         float angle = Vector3.Angle(direction, transform.forward);
         if(angle < fieldOfViewAngle * 0.5f){
             RaycastHit hit;
             if(Physics.Raycast(transform.position, direction.normalized, out hit, lOSRadius)){
                 if(hit.collider.tag == "Player"){
                     playerIsInLOS = true;
+                }else{
+                    playerIsInLOS = false;
+                    isShooting = false;
+                    canMove = true;
                 }
             }else{
                     playerIsInLOS = false;
+                    isShooting = false;
+                    canMove = true;
                 }
         }
     }
@@ -111,15 +123,30 @@ public class AI_Enemy : MonoBehaviour{
 
     void ChasePlayer(){            
         if(distance > shootingDistance){ 
+            canMove = true;
+            isShooting = false;
             stateObject.text = "Chase Mode";
             nav.speed = runningSpeed;
             nav.destination = playerPositionReference.position;
         }else{
             stateObject.text = "Shooting";
-            transform.LookAt(playerPositionReference);
             nav.speed = idleSpeed;
             isShooting = true;
-            canMove = false;
+            canMove = false; 
+            transform.LookAt(playerPositionReference);
+            nav.SetDestination(transform.position);
+        }
+    }
+
+    private void ShootPlayer(){ 
+        if(Physics.Raycast(shootingRaycastArea.transform.position, shootingRaycastArea.transform.forward, out hit, shootingDistance)){
+            hitTag = hit.transform.name;
+            Debug.Log("Acertou " + hitTag);
+
+            if(hit.collider.gameObject.tag == "Player"){
+                //anim.Play("Shooting");
+                Debug.Log("Shooting Player");
+            }
         }
     }
 
