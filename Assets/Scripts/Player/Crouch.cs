@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Crouch : MonoBehaviour
 {   
-    CharacterController characterController;
-    public static Vector3 playerPos;
-
+   [SerializeField] CharacterController characterController;
+   
     // Start is called before the first frame update
     void Start(){
-        characterController = gameObject.GetComponent<CharacterController>();
-        StartCoroutine(TrackTarget());
+        characterController = characterController.gameObject.GetComponent<CharacterController>();
 
     }
 
@@ -22,11 +21,4 @@ public class Crouch : MonoBehaviour
             characterController.height = 1.8f;
         }
     }
-       IEnumerator TrackTarget(){
-            while(true){
-                playerPos = gameObject.transform.position;
-                yield return null;
-            }
-        }
-
 }

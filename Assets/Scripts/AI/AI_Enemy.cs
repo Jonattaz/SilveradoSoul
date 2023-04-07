@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class AI_Enemy : MonoBehaviour{
            
@@ -10,7 +11,6 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private float normalSpeed;
     [SerializeField] float idleSpeed;
     [SerializeField] private float runningSpeed;
-
     [SerializeField] private float waitTimeAtWaypoint;
     [SerializeField] private bool canMove;
     [SerializeField] private Transform[] patrolSpots;
@@ -23,6 +23,7 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private bool isShooting; 
     [SerializeField] private Text stateObject;
     [SerializeField] private Transform playerPositionReference;
+    [SerializeField] private FirstPersonController character;
     NavMeshAgent nav;
     Animator anim;
 
@@ -30,13 +31,16 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private float fieldOfViewAngle;
     // Line Of Sight(LOS)
     [SerializeField] private float lOSRadius;
-     [SerializeField] private bool playerIsInLOS = false;
+    [SerializeField] private bool playerIsInLOS = false;
 
     [Header("Shooting Settings")]
     [SerializeField] private AudioSource gunFire;
     [SerializeField] private string hitTag;
     [SerializeField] private Camera shootingRaycastArea;
     [SerializeField] private float shootingDistance;
+    [SerializeField] private bool isFiring;
+    [SerializeField] private float fireRate = 1.5f;
+    [SerializeField] private int gunDamage = 5;
     private RaycastHit hit;
 
 
@@ -52,7 +56,6 @@ public class AI_Enemy : MonoBehaviour{
         waitTime = waitTimeAtWaypoint;
         randomSpotNumber = Random.Range(0, patrolSpots.Length);
         isShooting = false;
-
     }
 
         // Update is called once per frame
@@ -87,17 +90,17 @@ public class AI_Enemy : MonoBehaviour{
         if(angle < fieldOfViewAngle * 0.5f){
             RaycastHit hit;
             if(Physics.Raycast(transform.position, direction.normalized, out hit, lOSRadius)){
+                // Ele checa a todo momento durante o tiro
+                
                 if(hit.collider.tag == "Player"){
                     playerIsInLOS = true;
-                }else{
-                    playerIsInLOS = false;
-                    isShooting = false;
-                    canMove = true;
                 }
             }else{
                     playerIsInLOS = false;
-                    isShooting = false;
-                    canMove = true;
+                    //isShooting = false;
+                    //canMove = true;
+
+                    // Quando o inimigo está atirando no nada ele não entra nessa condição
                 }
         }
     }
@@ -139,23 +142,42 @@ public class AI_Enemy : MonoBehaviour{
     }
 
     private void ShootPlayer(){ 
-        if(Physics.Raycast(shootingRaycastArea.transform.position, shootingRaycastArea.transform.forward, out hit, shootingDistance)){
-            hitTag = hit.transform.name;
-            Debug.Log("Acertou " + hitTag);
-
-            if(hit.collider.gameObject.tag == "Player"){
-                //anim.Play("Shooting");
-                Debug.Log("Shooting Player");
-            }
+        if(Physics.Raycast(shootingRaycastArea.transform.position, shootingRaycastArea.transform.forward, out hit, lOSRadius)){
+            hitTag = hit.transform.tag;
         }
+
+        if(hitTag == "Player" && !isFiring){        
+            StartCoroutine(EnemyFire());
+        }
+
+        if(hitTag != "Player"){
+            isFiring = false;
+            nav.speed = idleSpeed;
+            transform.LookAt(playerPositionReference);
+        }
+    }
+
+    IEnumerator EnemyFire(){
+        Debug.Log("Shooting Player");
+        transform.LookAt(playerPositionReference);
+        nav.SetDestination(transform.position);
+        isFiring = true;
+        anim.Play("Shooting", -1, 0f);
+        gunFire.Play();
+        character.TakeDamage(gunDamage);
+        yield return new WaitForSeconds(fireRate);
+        isFiring = false;
     }
 
     public void TakeDamage(int damage){
         currentHealth -= damage;
         if(currentHealth <= 0){
+            anim.Play("Dying");
             stateObject.text = "Dead";
-            canMove = false;
             nav.speed = idleSpeed;
+            nav.enabled = false;
+            canMove = false;
+            isShooting = false;       
         }
     }
 }
