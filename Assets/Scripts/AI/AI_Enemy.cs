@@ -19,13 +19,15 @@ public class AI_Enemy : MonoBehaviour{
     private int randomSpotNumber;
 
     [Header("General Settings")]
-    [SerializeField] private int currentHealth = 50;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float maxHealth = 50;
     [SerializeField] private bool isShooting; 
     [SerializeField] private Text stateObject;
     [SerializeField] private Transform playerPositionReference;
     [SerializeField] private FirstPersonController character;
     NavMeshAgent nav;
     Animator anim;
+    UIHealthBar healthBar;
 
     [Header("AI Sight Settings")]
     [SerializeField] private float fieldOfViewAngle;
@@ -40,7 +42,7 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private float shootingDistance;
     [SerializeField] private bool isFiring;
     [SerializeField] private float fireRate = 1.5f;
-    [SerializeField] private int gunDamage = 5;
+    [SerializeField] private int gunDamage = 10;
     private RaycastHit hit;
 
 
@@ -53,9 +55,11 @@ public class AI_Enemy : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
+        currentHealth = maxHealth;
         waitTime = waitTimeAtWaypoint;
         randomSpotNumber = Random.Range(0, patrolSpots.Length);
         isShooting = false;
+        healthBar = GetComponentInChildren<UIHealthBar>();
     }
 
         // Update is called once per frame
@@ -171,9 +175,11 @@ public class AI_Enemy : MonoBehaviour{
 
     public void TakeDamage(int damage){
         currentHealth -= damage;
+        healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
         if(currentHealth <= 0){
             anim.Play("Dying");
             stateObject.text = "Dead";
+            healthBar.gameObject.SetActive(false);
             nav.speed = idleSpeed;
             nav.enabled = false;
             canMove = false;

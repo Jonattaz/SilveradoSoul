@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
@@ -12,7 +13,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private bool canMove;
-        [SerializeField] private int currentHealth;
+        [SerializeField] private float currentHealth;
+        [SerializeField] private float maxHealth;
         [SerializeField] private LeaningController leanSystem;
         [SerializeField] private Crouch crouchSystem;
         [SerializeField] private WeaponController weaponControllerSystem;
@@ -49,6 +51,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        [SerializeField] private UIPlayerHealthBar playerHealthBar;
+        [SerializeField] private bool isHealing;
 
         // Use this for initialization
         private void Start()
@@ -63,11 +67,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            currentHealth = maxHealth;
         }
       
         // Update is called once per frame
         private void Update()
         {
+            if(isHealing){
+                StartCoroutine(Healing());
+            }else{
+                StopCoroutine(Healing());
+            }
+
             if(canMove){
                 RotateView();
                 // the jump state needs to read here to make sure it is not missed
@@ -89,11 +100,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
             }
 
+
+
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
         public void TakeDamage(int damage){
             currentHealth -= damage;
+            playerHealthBar.SetHealthBarPercentage(currentHealth / maxHealth);
             if(currentHealth <= 0){
                 Debug.Log("Dead");
                 canMove = false;
@@ -102,8 +116,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 crouchSystem.enabled = false;
                 zoomSystem.enabled = false;
                 weapons.SetActive(false);
-
             }
+        }
+
+     
+        IEnumerator Healing(){
+            for(float currentHealing = currentHealth; currentHealing <= maxHealth; currentHealing += 0.3f){
+                currentHealth = currentHealing;
+                playerHealthBar.SetHealthBarPercentage(currentHealth / maxHealth);
+                yield return new WaitForSeconds (Time.deltaTime);
+            }
+            currentHealth = maxHealth;
+            isHealing = false;
         }
 
         private void PlayLandingSound()
