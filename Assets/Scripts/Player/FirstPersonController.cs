@@ -20,6 +20,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private WeaponController weaponControllerSystem;
         [SerializeField] private AimZoom zoomSystem;
         [SerializeField] private GameObject weapons;
+        public bool canHeal;
+
+
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
@@ -52,7 +55,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         [SerializeField] private UIPlayerHealthBar playerHealthBar;
-        [SerializeField] private bool isHealing;
 
         // Use this for initialization
         private void Start()
@@ -73,7 +75,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            if(isHealing){
+            if(canHeal){
                 StartCoroutine(Healing());
             }else{
                 StopCoroutine(Healing());
@@ -127,7 +129,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 yield return new WaitForSeconds (Time.deltaTime);
             }
             currentHealth = maxHealth;
-            isHealing = false;
+            canHeal = false;
         }
 
         private void PlayLandingSound()

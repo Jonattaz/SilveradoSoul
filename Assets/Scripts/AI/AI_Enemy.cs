@@ -40,9 +40,10 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private string hitTag;
     [SerializeField] private Camera shootingRaycastArea;
     [SerializeField] private float shootingDistance;
-    [SerializeField] private bool isFiring;
+    public bool isFiring;
     [SerializeField] private float fireRate = 1.5f;
     [SerializeField] private int gunDamage = 10;
+    [SerializeField] private int randomNumber;
     private RaycastHit hit;
 
 
@@ -78,14 +79,12 @@ public class AI_Enemy : MonoBehaviour{
                     ChasePlayer();
                 }
             }else{
-                ShootPlayer();
+                ShootPlayer();   
             }
         }
     }
-    
-    void StateController(){
-        
-    }
+ 
+
 
     // Check Line Of Sight
     void CheckLOS(){
@@ -151,7 +150,7 @@ public class AI_Enemy : MonoBehaviour{
         }
 
         if(hitTag == "Player" && !isFiring){        
-            StartCoroutine(EnemyFire());
+            StartCoroutine(EnemyFire());      
         }
 
         if(hitTag != "Player"){
@@ -162,13 +161,28 @@ public class AI_Enemy : MonoBehaviour{
     }
 
     IEnumerator EnemyFire(){
-        Debug.Log("Shooting Player");
-        transform.LookAt(playerPositionReference);
-        nav.SetDestination(transform.position);
         isFiring = true;
-        anim.Play("Shooting", -1, 0f);
-        gunFire.Play();
-        character.TakeDamage(gunDamage);
+        randomNumber = Random.Range(0, 10);
+                
+        if(randomNumber % 2 == 0){
+            Debug.Log("Shoot " + randomNumber);
+            Debug.Log("Shooting Player");
+            transform.LookAt(playerPositionReference);
+            nav.SetDestination(transform.position);
+            anim.Play("Shooting", -1, 0f);
+            gunFire.Play();
+            character.TakeDamage(gunDamage);
+        }else{
+            Debug.Log("Miss " + randomNumber);
+            Debug.Log("Shoot " + randomNumber);
+            Debug.Log("Shooting Player");
+            transform.LookAt(playerPositionReference);
+            nav.SetDestination(transform.position);
+            anim.Play("Shooting", -1, 0f);
+            gunFire.Play();
+        } 
+        
+            
         yield return new WaitForSeconds(fireRate);
         isFiring = false;
     }
