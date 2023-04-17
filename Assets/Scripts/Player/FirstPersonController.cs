@@ -123,7 +123,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
      
         IEnumerator Healing(){
-            for(float currentHealing = currentHealth; currentHealing <= maxHealth; currentHealing += 0.3f){
+            for(float currentHealing = currentHealth; currentHealing <= maxHealth; currentHealing += 0.1f){
                 currentHealth = currentHealing;
                 playerHealthBar.SetHealthBarPercentage(currentHealth / maxHealth);
                 yield return new WaitForSeconds (Time.deltaTime);
@@ -196,7 +196,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
             {
                 m_StepCycle += (m_CharacterController.velocity.magnitude + (speed*(m_IsWalking ? 1f : m_RunstepLenghten)))*
-                             Time.fixedDeltaTime;
+                    Time.fixedDeltaTime;
             }
 
             if (!(m_StepCycle > m_NextStep))
@@ -238,7 +238,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Camera.transform.localPosition =
                     m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
-                                      (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
+                        (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
                 newCameraPosition = m_Camera.transform.localPosition;
                 newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
             }

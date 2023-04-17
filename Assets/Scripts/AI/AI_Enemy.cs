@@ -25,7 +25,7 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private Text stateObject;
     [SerializeField] private Transform playerPositionReference;
     [SerializeField] private FirstPersonController character;
-    NavMeshAgent nav;
+    [HideInInspector] public NavMeshAgent nav;
     Animator anim;
     UIHealthBar healthBar;
 
@@ -40,10 +40,12 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private string hitTag;
     [SerializeField] private Camera shootingRaycastArea;
     [SerializeField] private float shootingDistance;
-    public bool isFiring;
     [SerializeField] private float fireRate = 1.5f;
     [SerializeField] private int gunDamage = 10;
     [SerializeField] private int randomNumber;
+    [SerializeField] private TrailRenderer bulletTrail;
+    [HideInInspector] public bool duelingMode;
+    public bool isFiring;
     private RaycastHit hit;
 
 
@@ -67,7 +69,11 @@ public class AI_Enemy : MonoBehaviour{
     void Update(){
         distance = Vector3.Distance(playerPositionReference.position, transform.position);
         anim.SetFloat("Speed", nav.speed);
-                        
+
+        if(duelingMode){
+            transform.LookAt(playerPositionReference);
+        }
+
         if(nav.isActiveAndEnabled){
             CheckLOS();
             if(!isShooting && canMove){
@@ -100,9 +106,7 @@ public class AI_Enemy : MonoBehaviour{
                 }
             }else{
                     playerIsInLOS = false;
-                    //isShooting = false;
-                    //canMove = true;
-
+              
                     // Quando o inimigo está atirando no nada ele não entra nessa condição
                 }
         }
@@ -170,6 +174,8 @@ public class AI_Enemy : MonoBehaviour{
             transform.LookAt(playerPositionReference);
             nav.SetDestination(transform.position);
             anim.Play("Shooting", -1, 0f);
+            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+            StartCoroutine(SpawnTrail(trail, hit));
             gunFire.Play();
             character.TakeDamage(gunDamage);
         }else{
@@ -178,6 +184,8 @@ public class AI_Enemy : MonoBehaviour{
             Debug.Log("Shooting Player");
             transform.LookAt(playerPositionReference);
             nav.SetDestination(transform.position);
+            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+            StartCoroutine(SpawnTrail(trail, hit));
             anim.Play("Shooting", -1, 0f);
             gunFire.Play();
         } 
@@ -199,6 +207,21 @@ public class AI_Enemy : MonoBehaviour{
             canMove = false;
             isShooting = false;       
         }
+    }
+
+     private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit){
+        float time = 0;
+        Vector3 startPosition = Trail.transform.position;
+
+        while (time < 1){
+            Trail.transform.position = Vector3.Lerp(startPosition, Hit.point, time);
+            time += Time.deltaTime / Trail.time;
+
+            yield return null;
+        }
+
+        Trail.transform.position = Hit.point;
+        Destroy(Trail.gameObject, Trail.time);
     }
 }
 

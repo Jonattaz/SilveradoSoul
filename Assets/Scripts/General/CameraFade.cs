@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-namespace PudimdimGames{
 
     public class CameraFade : MonoBehaviour
     {
@@ -64,4 +63,4 @@ namespace PudimdimGames{
             }
         }
     }
-}
+

@@ -13,6 +13,7 @@ public class HandgunFire : MonoBehaviour
     [Header("Bullet Properties")]
     [SerializeField] private GameObject impactEffect;
     [SerializeField] private int handgunDamage = 10;
+    [SerializeField] private TrailRenderer bulletTrail;
     private RaycastHit hit;
     private Ray ray;
 
@@ -30,8 +31,11 @@ public class HandgunFire : MonoBehaviour
         theGun.GetComponent<Animator>().Play("handgunFire", -1, 0f);
         
         if(Physics.Raycast(ray, out hit, Mathf.Infinity)){
-            GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject;
-             Destroy(impactEffectGO, 5);
+            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+            StartCoroutine(SpawnTrail(trail, hit));
+
+            GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject; 
+            Destroy(impactEffectGO, 5);
             if(hit.collider.gameObject.tag == "Enemy"){
                 AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
                 enemy.TakeDamage(handgunDamage);
@@ -45,6 +49,21 @@ public class HandgunFire : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         isFiring = false;
 
+    }
+
+    private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit){
+        float time = 0;
+        Vector3 startPosition = Trail.transform.position;
+
+        while (time < 1){
+            Trail.transform.position = Vector3.Lerp(startPosition, Hit.point, time);
+            time += Time.deltaTime / Trail.time;
+
+            yield return null;
+        }
+
+        Trail.transform.position = Hit.point;
+        Destroy(Trail.gameObject, Trail.time);
     }
 
      IEnumerator ReloadingHandgun(){
