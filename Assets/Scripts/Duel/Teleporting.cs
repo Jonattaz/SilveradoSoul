@@ -9,9 +9,13 @@ public class Teleporting : MonoBehaviour
     [SerializeField] private Transform playerTeleportTarget;
     [SerializeField] private Transform enemyTeleportTarget;
     [SerializeField] private FirstPersonController player;
+    [SerializeField] private LeaningController leaningMech;
+    [SerializeField] private Crouch crouchMech;
+    [SerializeField] private WeaponController weaponControlMech;
     [SerializeField] private AI_Enemy enemy;
-    //[SerializeField] private CountDownTimer duelCounter;
+    [SerializeField] private CountDownTimer duelCounter;
     [SerializeField] private bool canTeleport;
+    [SerializeField] private BoxCollider boxCollider;
     
 
     void OnTriggerStay(Collider other){
@@ -22,7 +26,12 @@ public class Teleporting : MonoBehaviour
         if(canTeleport){
             StartCoroutine(Teleport());
             CameraFade.FadeInstance.Fade();
+            
             player.GetComponent<FirstPersonController>().enabled = false;
+            leaningMech.enabled = false;
+            crouchMech.enabled = false;
+            weaponControlMech.enabled = false;
+
             enemy.GetComponent<AI_Enemy>().nav.speed = 0;
             enemy.GetComponent<AI_Enemy>().duelingMode = true;
             enemy.GetComponent<AI_Enemy>().nav.enabled = false;
@@ -44,8 +53,8 @@ public class Teleporting : MonoBehaviour
         enemyTeleportTarget.transform.position.z);
 
         
-        //duelCounter.canCount = true;
-        
+        duelCounter.canCount = true;
+        boxCollider.enabled = false;        
     }
             
     

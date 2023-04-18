@@ -99,16 +99,13 @@ public class AI_Enemy : MonoBehaviour{
         if(angle < fieldOfViewAngle * 0.5f){
             RaycastHit hit;
             if(Physics.Raycast(transform.position, direction.normalized, out hit, lOSRadius)){
-                // Ele checa a todo momento durante o tiro
                 
                 if(hit.collider.tag == "Player"){
                     playerIsInLOS = true;
                 }
             }else{
                     playerIsInLOS = false;
-              
-                    // Quando o inimigo está atirando no nada ele não entra nessa condição
-                }
+                              }
         }
     }
 

@@ -8,10 +8,14 @@ using UnityStandardAssets.Characters.FirstPerson;
     public class CountDownTimer : MonoBehaviour
     {
         [SerializeField] private float currentTime = 0f;
-        [SerializeField] private float startingTime = 10f;
+        [SerializeField] private float startingTime = 5f;
         [SerializeField] private Text countDownText;
+        [SerializeField] private Text warningMessage;
         [SerializeField] public bool startDuel;
         [SerializeField] private FirstPersonController player;
+        [SerializeField] private LeaningController leaningMech;
+        [SerializeField] private Crouch crouchMech;
+        [SerializeField] private WeaponController weaponControlMech;
         [SerializeField] private AI_Enemy enemy;
         [HideInInspector] private bool restart;
         [HideInInspector] public bool canCount;   
@@ -35,19 +39,28 @@ using UnityStandardAssets.Characters.FirstPerson;
 
         // TimerController
         void CountDownController(){
+            countDownText.gameObject.SetActive(true);
+            warningMessage.gameObject.SetActive(true);
+        
             currentTime -= 1 * Time.deltaTime;
-            countDownText.text = currentTime.ToString("0");
-   
+            countDownText.text = currentTime.ToString();
+            
+            
             if(currentTime <= 0 && !restart){
+                warningMessage.text = "Atire";
                 currentTime = 0;
                 startDuel = true;
+                countDownText.gameObject.SetActive(false);
+                warningMessage.gameObject.SetActive(false);
                 player.GetComponent<FirstPersonController>().enabled = true;
-                enemy.GetComponent<AI_Enemy>().enabled = false;
+                leaningMech.enabled = true;
+                crouchMech.enabled = true;
+                weaponControlMech.enabled = true;
 
-            } else if(restart){
-                currentTime = startingTime;
-                restart = !restart;
-               
+                enemy.GetComponent<AI_Enemy>().nav.enabled = true;
+                enemy.duelingMode = false;
+
+                canCount = false;
             }
         }
 
