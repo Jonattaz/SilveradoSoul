@@ -6,17 +6,20 @@ public class WeaponController : MonoBehaviour
 {   public GameObject emptySlot;
     public GameObject handgunItem;
     public GameObject rifleItem;
+    public bool duelMode;
     public static bool handgunEquiped;
     public static bool rifleEquiped;
 
     // Update is called once per frame
-    void Update()
-    {
-        EquipInput();
+    void Update(){
+        if(duelMode){
+            EquipEmptySlot();
+        }else{        
+            EquipInput();
+        }
     }
 
-    void EquipHandgun()
-    {
+    void EquipHandgun(){
         emptySlot.SetActive(false);
         rifleItem.SetActive(false);
         rifleEquiped = false;
@@ -24,9 +27,7 @@ public class WeaponController : MonoBehaviour
         handgunItem.SetActive(true);
     }
 
-    void EquipRifle()
-    {
-        
+    void EquipRifle(){
         emptySlot.SetActive(false);
         handgunItem.SetActive(false);
         handgunEquiped = false;
@@ -34,8 +35,7 @@ public class WeaponController : MonoBehaviour
         rifleItem.SetActive(true);
     }
 
-    void EquipEmptySlot()
-    {
+    void EquipEmptySlot(){
         handgunItem.SetActive(false);
         handgunEquiped = false;
         rifleItem.SetActive(false);

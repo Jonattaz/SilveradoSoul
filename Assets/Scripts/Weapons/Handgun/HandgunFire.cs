@@ -39,6 +39,10 @@ public class HandgunFire : MonoBehaviour
             if(hit.collider.gameObject.tag == "Enemy"){
                 AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
                 enemy.TakeDamage(handgunDamage);
+            }else if(hit.collider.gameObject.tag == "Head"){
+                AI_Enemy enemy = hit.collider.gameObject.GetComponentInParent<AI_Enemy>();
+                enemy.TakeDamage(((int)enemy.maxHealth));
+                //Debug.Log("Headshot");
             }
         }
 

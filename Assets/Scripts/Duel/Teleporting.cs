@@ -10,6 +10,7 @@ public class Teleporting : MonoBehaviour
     [SerializeField] private Transform enemyTeleportTarget;
     [SerializeField] private FirstPersonController player;
     [SerializeField] private LeaningController leaningMech;
+    [SerializeField] private SlowMotion slowMotionMech;
     [SerializeField] private Crouch crouchMech;
     [SerializeField] private WeaponController weaponControlMech;
     [SerializeField] private AI_Enemy enemy;
@@ -25,13 +26,13 @@ public class Teleporting : MonoBehaviour
         
         if(canTeleport){
             StartCoroutine(Teleport());
+            weaponControlMech.duelMode = true;
             CameraFade.FadeInstance.Fade();
-            
-            player.GetComponent<FirstPersonController>().enabled = false;
+            slowMotionMech.enabled = false;
+            player.GetComponent<FirstPersonController>().canMove = false;
+            player.GetComponent<FirstPersonController>().duelMode = true;
             leaningMech.enabled = false;
-            crouchMech.enabled = false;
-            weaponControlMech.enabled = false;
-
+            crouchMech.enabled = false;            
             enemy.GetComponent<AI_Enemy>().nav.speed = 0;
             enemy.GetComponent<AI_Enemy>().duelingMode = true;
             enemy.GetComponent<AI_Enemy>().nav.enabled = false;

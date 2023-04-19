@@ -16,14 +16,13 @@ using UnityStandardAssets.Characters.FirstPerson;
         [SerializeField] private LeaningController leaningMech;
         [SerializeField] private Crouch crouchMech;
         [SerializeField] private WeaponController weaponControlMech;
+        [SerializeField] private SlowMotion slowMotionMech;
         [SerializeField] private AI_Enemy enemy;
-        [HideInInspector] private bool restart;
         [HideInInspector] public bool canCount;   
 
        
         // Start is called before the first frame update
         void Start(){
-            restart = false;
             currentTime = startingTime;
         }
 
@@ -46,16 +45,18 @@ using UnityStandardAssets.Characters.FirstPerson;
             countDownText.text = currentTime.ToString();
             
             
-            if(currentTime <= 0 && !restart){
+            if(currentTime <= 0){
                 warningMessage.text = "Atire";
                 currentTime = 0;
                 startDuel = true;
                 countDownText.gameObject.SetActive(false);
                 warningMessage.gameObject.SetActive(false);
-                player.GetComponent<FirstPersonController>().enabled = true;
+                slowMotionMech.enabled = true;
+                player.GetComponent<FirstPersonController>().canMove = true;
+                player.GetComponent<FirstPersonController>().duelMode = false;
                 leaningMech.enabled = true;
                 crouchMech.enabled = true;
-                weaponControlMech.enabled = true;
+                weaponControlMech.duelMode = false;
 
                 enemy.GetComponent<AI_Enemy>().nav.enabled = true;
                 enemy.duelingMode = false;

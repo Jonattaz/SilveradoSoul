@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof (AudioSource))]
     public class FirstPersonController : MonoBehaviour
     {
-        [SerializeField] private bool canMove;
+        public bool canMove;
         [SerializeField] private float currentHealth;
         [SerializeField] private float maxHealth;
         [SerializeField] private LeaningController leanSystem;
@@ -20,9 +20,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private WeaponController weaponControllerSystem;
         [SerializeField] private AimZoom zoomSystem;
         [SerializeField] private GameObject weapons;
+        [HideInInspector] public bool duelMode;
         public bool canHeal;
-
-
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
@@ -100,6 +99,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_MoveDir.y = 0f;
                 }
+            }else if(!canMove && duelMode){
+                RotateView();
             }
 
 

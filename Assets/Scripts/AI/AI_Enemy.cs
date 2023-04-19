@@ -20,7 +20,7 @@ public class AI_Enemy : MonoBehaviour{
 
     [Header("General Settings")]
     [SerializeField] private float currentHealth;
-    [SerializeField] private float maxHealth = 50;
+    [SerializeField] public float maxHealth = 50;
     [SerializeField] private bool isShooting; 
     [SerializeField] private Text stateObject;
     [SerializeField] private Transform playerPositionReference;
@@ -45,6 +45,13 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private int randomNumber;
     [SerializeField] private TrailRenderer bulletTrail;
     [HideInInspector] public bool duelingMode;
+    [SerializeField] private float currentReactionTime = 0f;
+    [SerializeField] private float reactionTime = 5f;
+    [SerializeField] private bool duelEnemy;
+    [HideInInspector] public bool canCount;   
+    [SerializeField] private bool canShot;
+    [SerializeField] private int maxIndexShoot;
+    [SerializeField] private int indexShoot;
     public bool isFiring;
     private RaycastHit hit;
 
@@ -58,6 +65,7 @@ public class AI_Enemy : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
+        currentReactionTime = reactionTime;
         currentHealth = maxHealth;
         waitTime = waitTimeAtWaypoint;
         randomSpotNumber = Random.Range(0, patrolSpots.Length);
@@ -72,6 +80,7 @@ public class AI_Enemy : MonoBehaviour{
 
         if(duelingMode){
             transform.LookAt(playerPositionReference);
+            gunDamage = 50;
         }
 
         if(nav.isActiveAndEnabled){
@@ -88,10 +97,18 @@ public class AI_Enemy : MonoBehaviour{
                 ShootPlayer();   
             }
         }
+
+        if(duelEnemy){
+            if(canCount){
+                CountDownController();
+            }else{
+                currentReactionTime = reactionTime;
+            }
+        }else{
+            canShot = true;
+        }
     }
  
-
-
     // Check Line Of Sight
     void CheckLOS(){
         Vector3 direction = playerPositionReference.position - transform.position;
@@ -105,7 +122,7 @@ public class AI_Enemy : MonoBehaviour{
                 }
             }else{
                     playerIsInLOS = false;
-                              }
+            }
         }
     }
 
@@ -151,7 +168,11 @@ public class AI_Enemy : MonoBehaviour{
         }
 
         if(hitTag == "Player" && !isFiring){        
-            StartCoroutine(EnemyFire());      
+            StartCoroutine(EnemyFire());
+
+            if(indexShoot != maxIndexShoot){
+                canCount = true;
+            }
         }
 
         if(hitTag != "Player"){
@@ -164,32 +185,50 @@ public class AI_Enemy : MonoBehaviour{
     IEnumerator EnemyFire(){
         isFiring = true;
         randomNumber = Random.Range(0, 10);
-                
-        if(randomNumber % 2 == 0){
-            Debug.Log("Shoot " + randomNumber);
-            Debug.Log("Shooting Player");
-            transform.LookAt(playerPositionReference);
-            nav.SetDestination(transform.position);
-            anim.Play("Shooting", -1, 0f);
-            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hit));
-            gunFire.Play();
-            character.TakeDamage(gunDamage);
-        }else{
-            Debug.Log("Miss " + randomNumber);
-            Debug.Log("Shoot " + randomNumber);
-            Debug.Log("Shooting Player");
-            transform.LookAt(playerPositionReference);
-            nav.SetDestination(transform.position);
-            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hit));
-            anim.Play("Shooting", -1, 0f);
-            gunFire.Play();
-        } 
         
+        if(canShot){        
+            if(randomNumber % 2 == 0){
+                //Debug.Log("Shoot " + randomNumber);
+                //Debug.Log("Shooting Player");
+                transform.LookAt(playerPositionReference);
+                nav.SetDestination(transform.position);
+                anim.Play("Shooting", -1, 0f);
+                TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit));
+                gunFire.Play();
+                character.TakeDamage(gunDamage);
+            }else{
+                // Debug.Log("Miss " + randomNumber);
+                // Debug.Log("Shoot " + randomNumber);
+                // Debug.Log("Shooting Player");
+                transform.LookAt(playerPositionReference);
+                nav.SetDestination(transform.position);
+                TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit));
+                anim.Play("Shooting", -1, 0f);
+                gunFire.Play();
+            } 
             
+            indexShoot = maxIndexShoot;
+
+        }
         yield return new WaitForSeconds(fireRate);
         isFiring = false;
+        canCount = false;
+        
+    }
+
+    void CountDownController(){
+        Debug.Log("Count down Mode");
+
+        currentReactionTime -= 1 * Time.deltaTime;
+            
+            
+        if(currentReactionTime <= 0){
+            currentReactionTime = 0;
+            canShot = true;
+            canCount = false;
+        }
     }
 
     public void TakeDamage(int damage){
