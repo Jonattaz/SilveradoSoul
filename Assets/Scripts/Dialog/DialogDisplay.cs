@@ -10,6 +10,8 @@ public class DialogDisplay : MonoBehaviour
 
     public GameObject speakerRight;
     public GameObject dialogPanel;
+    [SerializeField] private bool duelDialog;
+    [SerializeField] private Teleporting teleportObject;
 
     private SpeakerUI speakerUILeft;
 
@@ -32,7 +34,7 @@ public class DialogDisplay : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O)) 
+        if (Input.GetKeyDown(KeyCode.F)) 
         {
             AdvanceConversation();
         
@@ -55,6 +57,11 @@ public class DialogDisplay : MonoBehaviour
             speakerUILeft.Hide();
             speakerUIRight.Hide();
             dialogPanel.SetActive(false);
+            
+            if(duelDialog){
+                teleportObject.canTeleport = true;
+            }
+
             activeLineIndex = 0;
              // Bool that inform if the player is talking = false
         }

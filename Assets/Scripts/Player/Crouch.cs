@@ -15,7 +15,7 @@ public class Crouch : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(Input.GetKey(KeyCode.C)){
+        if(Input.GetKey(KeyCode.LeftControl)){
             characterController.height = 1.0f;
         }else{
             characterController.height = 1.8f;

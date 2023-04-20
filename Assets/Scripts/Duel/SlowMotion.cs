@@ -32,7 +32,7 @@ public class SlowMotion : MonoBehaviour
     private void SlowMotionController(){
         
         
-            if(Input.GetKeyDown(KeyCode.F)){
+            if(Input.GetKeyDown(KeyCode.R)){
                 bulletTimeControl = !bulletTimeControl;
             }
             

@@ -60,7 +60,6 @@ using UnityStandardAssets.Characters.FirstPerson;
 
                 enemy.GetComponent<AI_Enemy>().nav.enabled = true;
                 enemy.duelingMode = false;
-
                 canCount = false;
             }
         }

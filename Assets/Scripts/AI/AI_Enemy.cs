@@ -76,15 +76,16 @@ public class AI_Enemy : MonoBehaviour{
         // Update is called once per frame
     void Update(){
         distance = Vector3.Distance(playerPositionReference.position, transform.position);
-        anim.SetFloat("Speed", nav.speed);
-
+        
         if(duelingMode){
             transform.LookAt(playerPositionReference);
             gunDamage = 50;
         }
 
+       
+        anim.SetFloat("Speed", nav.speed);
         if(nav.isActiveAndEnabled){
-            CheckLOS();
+                CheckLOS();
             if(!isShooting && canMove){
                 if(playerIsInLOS == false){
                     Patrol();
@@ -97,6 +98,7 @@ public class AI_Enemy : MonoBehaviour{
                 ShootPlayer();   
             }
         }
+        
 
         if(duelEnemy){
             if(canCount){
@@ -219,7 +221,7 @@ public class AI_Enemy : MonoBehaviour{
     }
 
     void CountDownController(){
-        Debug.Log("Count down Mode");
+        //Debug.Log("Count down Mode");
 
         currentReactionTime -= 1 * Time.deltaTime;
             
@@ -243,6 +245,7 @@ public class AI_Enemy : MonoBehaviour{
             canMove = false;
             isShooting = false;       
         }
+        
     }
 
      private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit){
