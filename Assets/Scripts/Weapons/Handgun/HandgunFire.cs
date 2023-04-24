@@ -7,7 +7,7 @@ public class HandgunFire : MonoBehaviour
     [SerializeField] private GameObject theGun;
     [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private AudioSource gunFire;
-    [SerializeField] private bool isFiring = false;
+    public bool isFiring = false;
     [SerializeField] private AudioSource emptyAmmoSound;
     
     [Header("Bullet Properties")]
@@ -80,8 +80,7 @@ public class HandgunFire : MonoBehaviour
     private void HandgunInput(){
         
         // Para testar o tiro usando apenas teclas 
-        /* #if UNITY_EDITOR
-           if(Input.GetKeyDown(KeyCode.K)){
+          /* if(Input.GetKeyDown(KeyCode.K)){
                 if(GlobalAmmo.ammo < 1){
                     theGun.GetComponent<Animator>().Play("Default");
                     emptyAmmoSound.Play();
@@ -97,11 +96,11 @@ public class HandgunFire : MonoBehaviour
                 theGun.GetComponent<Animator>().Play("handgunAim");
             }else{
                 theGun.GetComponent<Animator>().Play("Default");
-            }
-        #endif */
+            } */
+    
 
 
-       if(Input.GetButtonDown("Fire1")){
+        if(Input.GetButtonDown("Fire1")){
             if(GlobalAmmo.ammo < 1){
                 theGun.GetComponent<Animator>().Play("Default");
                 emptyAmmoSound.Play();

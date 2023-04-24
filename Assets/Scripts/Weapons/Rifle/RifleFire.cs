@@ -7,13 +7,13 @@ public class RifleFire : MonoBehaviour
     [SerializeField] private GameObject theGun;
     [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private AudioSource gunFire;
-    [SerializeField] private bool isFiring = false;
+    public bool isFiring = false;
     [SerializeField] private AudioSource emptyAmmoSound;
     private bool isAiming = false;
 
     [Header("Bullet Properties")]
     [SerializeField] private GameObject impactEffect;
-    [SerializeField] private int rifleDamage = 30;
+    [SerializeField] private int rifleDamage = 25;
     [SerializeField] private TrailRenderer bulletTrail;
 
     private RaycastHit hit;
@@ -21,6 +21,7 @@ public class RifleFire : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
+        ray = Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0));
         RifleInput();
     }
 
@@ -30,17 +31,25 @@ public class RifleFire : MonoBehaviour
         theGun.GetComponent<Animator>().Play("rifleFire", -1, 0f);
         muzzleFlash.SetActive(true); 
         gunFire.Play();
-       
+        
         if(Physics.Raycast(ray, out hit, Mathf.Infinity)){
+
             TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hit));
-            
+            StartCoroutine(SpawnTrail(trail, hit));   
+
             GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject;
              Destroy(impactEffectGO, 2);
+
+            Debug.Log(hit.collider.gameObject.tag);
+
             if(hit.collider.gameObject.tag == "Enemy"){
                 AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
                 enemy.TakeDamage(rifleDamage);
                 // Tocar som de acerto
+            }else if(hit.collider.gameObject.tag == "Head"){
+                AI_Enemy enemy = hit.collider.gameObject.GetComponentInParent<AI_Enemy>();
+                enemy.TakeDamage(((int)enemy.maxHealth));
+                //Debug.Log("Headshot");
             }
         }
 
@@ -52,6 +61,7 @@ public class RifleFire : MonoBehaviour
     }
 
      private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit){
+        Debug.Log("TrailSpawn");
         float time = 0;
         Vector3 startPosition = Trail.transform.position;
 
@@ -76,8 +86,7 @@ public class RifleFire : MonoBehaviour
     private void RifleInput(){
         
         // Para testar o riffle usando apenas teclas
-        /* #if UNITY_EDITOR
-            if(Input.GetKeyDown(KeyCode.K) && isAiming){
+           /* if(Input.GetKeyDown(KeyCode.K) && isAiming){
                 if(GlobalAmmo.ammo < 1){
                     theGun.GetComponent<Animator>().Play("Default");
                     isAiming = false;
@@ -97,9 +106,7 @@ public class RifleFire : MonoBehaviour
             }else{
                 theGun.GetComponent<Animator>().Play("Default");
                 isAiming = false;
-            }
-       
-        #endif */
+            } */
 
         if(Input.GetButtonDown("Fire1") && isAiming){
                 if(GlobalAmmo.ammo < 1){
@@ -121,6 +128,6 @@ public class RifleFire : MonoBehaviour
         }else{
             theGun.GetComponent<Animator>().Play("Default");
             isAiming = false;
-        }
+        } 
     }
 }

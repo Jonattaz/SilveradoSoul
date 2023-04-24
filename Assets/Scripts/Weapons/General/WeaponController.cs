@@ -48,11 +48,13 @@ public class WeaponController : MonoBehaviour
         
         if(Input.GetKeyDown("1") && HandgunPickup.handgunCollected)
         {
+            rifleItem.GetComponent<RifleFire>().isFiring = false;
             EquipHandgun();
         }
 
         if(Input.GetKeyDown("2") && RiflePickup.rifleCollected)
         {
+            handgunItem.GetComponent<HandgunFire>().isFiring = false;
             EquipRifle();
         }
 
