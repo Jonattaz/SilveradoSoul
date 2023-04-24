@@ -10023,6 +10023,9 @@ Transform:
 =======
   m_LocalPosition: {x: -16.8, y: 2.75, z: -29.4}
   m_LocalScale: {x: 3, y: 10, z: 3}
+<<<<<<< HEAD
+>>>>>>> parent of 1c57d57 (- Fiz)
+=======
 >>>>>>> parent of 1c57d57 (- Fiz)
   m_Children:
   - {fileID: 1752130884}

@@ -40,6 +40,9 @@ public class RifleFire : MonoBehaviour
              Destroy(impactEffectGO, 3);
 =======
              Destroy(impactEffectGO, 2);
+<<<<<<< HEAD
+>>>>>>> parent of 1c57d57 (- Fiz)
+=======
 >>>>>>> parent of 1c57d57 (- Fiz)
             if(hit.collider.gameObject.tag == "Enemy"){
                 AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
