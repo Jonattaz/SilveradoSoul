@@ -18,6 +18,7 @@ public class Teleporting : MonoBehaviour
     [SerializeField] private CountDownTimer duelCounter;
     [SerializeField] public bool canTeleport;
     [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private GameObject dialog;
     
 
     void OnTriggerStay(Collider other){
@@ -54,8 +55,10 @@ public class Teleporting : MonoBehaviour
         enemyTeleportTarget.transform.position.y,
         enemyTeleportTarget.transform.position.z);
 
+        dialog.SetActive(false);
         enemyDecoy.SetActive(false);
         duelCounter.canCount = true;
         boxCollider.enabled = false;        
+        
     }
 }
