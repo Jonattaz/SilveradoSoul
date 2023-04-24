@@ -52,6 +52,7 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private bool canShot;
     [SerializeField] private int maxIndexShoot;
     [SerializeField] private int indexShoot;
+    [SerializeField] private GameObject bulletSpawn;
     public bool isFiring;
     private RaycastHit hit;
 
@@ -195,7 +196,8 @@ public class AI_Enemy : MonoBehaviour{
                 transform.LookAt(playerPositionReference);
                 nav.SetDestination(transform.position);
                 anim.Play("Shooting", -1, 0f);
-                TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+                TrailRenderer trail = Instantiate(bulletTrail, bulletSpawn.transform.position, 
+                    Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit));
                 gunFire.Play();
                 character.TakeDamage(gunDamage);
@@ -205,7 +207,7 @@ public class AI_Enemy : MonoBehaviour{
                 // Debug.Log("Shooting Player");
                 transform.LookAt(playerPositionReference);
                 nav.SetDestination(transform.position);
-                TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+                TrailRenderer trail = Instantiate(bulletTrail, bulletSpawn.transform.position, Quaternion.identity);
                 StartCoroutine(SpawnTrail(trail, hit));
                 anim.Play("Shooting", -1, 0f);
                 gunFire.Play();
