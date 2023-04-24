@@ -36,7 +36,11 @@ public class RifleFire : MonoBehaviour
             StartCoroutine(SpawnTrail(trail, hit));
             
             GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject;
+<<<<<<< HEAD
              Destroy(impactEffectGO, 3);
+=======
+             Destroy(impactEffectGO, 2);
+>>>>>>> parent of 1c57d57 (- Fiz)
             if(hit.collider.gameObject.tag == "Enemy"){
                 AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
                 enemy.TakeDamage(rifleDamage);
