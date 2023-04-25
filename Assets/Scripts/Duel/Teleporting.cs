@@ -18,10 +18,14 @@ public class Teleporting : MonoBehaviour
     [SerializeField] private CountDownTimer duelCounter;
     [SerializeField] public bool canTeleport;
     [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private GameObject dialogObject;
+    [SerializeField] private GameObject dialogActivator;
     
-
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
     void OnTriggerStay(Collider other){
-        
         if(canTeleport){
             weaponControlMech.duelMode = true;
             CameraFade.FadeInstance.Fade();
@@ -55,6 +59,8 @@ public class Teleporting : MonoBehaviour
         enemyTeleportTarget.transform.position.z);
 
         enemyDecoy.SetActive(false);
+        dialogObject.SetActive(false);
+        dialogActivator.SetActive(false);
         duelCounter.canCount = true;
         boxCollider.enabled = false;        
     }

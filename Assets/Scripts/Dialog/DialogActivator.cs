@@ -8,11 +8,12 @@ public class DialogActivator : MonoBehaviour
 
     /// OnTriggerStay is called once per frame for every Collider other that is touching the trigger.
     void OnTriggerStay(Collider other){
-        DialogDisplay.SetActive(true);
+        if(other.gameObject.tag == "Player")
+            DialogDisplay.SetActive(true);
     }
 
     /// OnTriggerExit is called when the Collider other has stopped touching the trigger.
     void OnTriggerExit(Collider other){
-        DialogDisplay.SetActive(false);
+            DialogDisplay.SetActive(false);
     }
 }
