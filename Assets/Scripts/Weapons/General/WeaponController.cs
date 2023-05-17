@@ -46,12 +46,12 @@ public class WeaponController : MonoBehaviour
 
     private void EquipInput(){
         
-        if(Input.GetKeyDown("1") && HandgunPickup.handgunCollected)
+        if(Input.GetKeyDown("1"))
         {
             EquipHandgun();
         }
 
-        if(Input.GetKeyDown("2") && RiflePickup.rifleCollected)
+        if(Input.GetKeyDown("2"))
         {
             EquipRifle();
         }
