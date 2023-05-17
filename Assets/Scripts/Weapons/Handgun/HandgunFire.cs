@@ -35,7 +35,7 @@ public class HandgunFire : MonoBehaviour
             StartCoroutine(SpawnTrail(trail, hit));
 
             GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject; 
-            Destroy(impactEffectGO, 5);
+            Destroy(impactEffectGO, 1);
             if(hit.collider.gameObject.tag == "Enemy"){
                 AI_Enemy enemy = hit.collider.gameObject.GetComponent<AI_Enemy>();
                 enemy.TakeDamage(handgunDamage);

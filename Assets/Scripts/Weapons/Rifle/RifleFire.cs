@@ -38,7 +38,7 @@ public class RifleFire : MonoBehaviour
             StartCoroutine(SpawnTrail(trail, hit));   
 
             GameObject impactEffectGO = Instantiate(impactEffect, hit.point, Quaternion.identity) as GameObject;
-             Destroy(impactEffectGO, 2);
+             Destroy(impactEffectGO, 1);
 
             Debug.Log(hit.collider.gameObject.tag);
 
