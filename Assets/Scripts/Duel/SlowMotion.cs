@@ -12,20 +12,20 @@ public class SlowMotion : MonoBehaviour
     [SerializeField] private float startingTime = 1f;
     [SerializeField] private bool canActivateSlowMotion;
     [SerializeField] private UIPlayerSlowMotion slowMotionBar;
-    [HideInInspector] private bool restart;
+    [HideInInspector] public bool menuOn;
 
     private float startTimeScale;
     private float startFixedDeltaTime;
 
     // Start is called before the first frame update
     void Start(){
-        startTimeScale = Time.timeScale;
-        startFixedDeltaTime = Time.fixedDeltaTime;
+            startTimeScale = Time.timeScale;
+            startFixedDeltaTime = Time.fixedDeltaTime;
     }
 
     // Update is called once per frame
     void Update(){
-        SlowMotionController();
+            SlowMotionController();
         
     }
 

@@ -54,6 +54,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         [SerializeField] private UIPlayerHealthBar playerHealthBar;
+        public bool canLock;
 
         // Use this for initialization
         private void Start()
@@ -181,6 +182,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 UpdateCameraPosition(speed);
 
                 m_MouseLook.UpdateCursorLock();
+                canLock = false;
+            }else{
+                m_MouseLook.m_cursorIsLocked = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                canLock = true;
             }
         }
 
