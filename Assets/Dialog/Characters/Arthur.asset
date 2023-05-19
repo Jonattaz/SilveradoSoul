@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 342e15bfe59da5948a2d00909c4d9d2c, type: 3}
-  m_Name: Seto Kaiba
+  m_Name: Arthur
   m_EditorClassIdentifier: 
-  fullName: Seto Kaiba
+  fullName: Arthur

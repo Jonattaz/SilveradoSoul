@@ -13,17 +13,27 @@ public class QuestGiver : MonoBehaviour
     public Text title;
     public Text description;
     public bool completed = false;
+    public bool canSpawnEnemies;
 
     [HideInInspector]
     public bool localActive;
 
     public int questIndex;
     
+    public GameObject enemies;
+
     private void Awake() {
         instance = this;
     }
 
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    void Update(){
+        if(canSpawnEnemies)
+            enemies.SetActive(true);
+    }
+
     public void OpenQuestWindow(){
+        canSpawnEnemies = true;
         questWindow.SetActive(true);
         title.text = quest.title;
         description.text = quest.description;

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e3073dcbc0be1647b1f33dd4199e263, type: 3}
-  m_Name: Teste
+  m_Name: Duel Tutorial
   m_EditorClassIdentifier: 
   speakerLeft: {fileID: 11400000, guid: 28eefbffd081ce5408fbc822477e7f5e, type: 2}
-  speakerRight: {fileID: 11400000, guid: cb5553d4e2b7a35458743614b8ee5b58, type: 2}
+  speakerRight: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
   lines:
   - character: {fileID: 11400000, guid: 28eefbffd081ce5408fbc822477e7f5e, type: 2}
-    text: "Kaiba, o que est\xE1 fazendo aqui?"
-  - character: {fileID: 11400000, guid: cb5553d4e2b7a35458743614b8ee5b58, type: 2}
-    text: "Voc\xEA sabe muito bem fara\xF3. Eu te desafio para um duelo."
+    text: "Quer testar a sua sorte contra o gatilho mais r\xE1pido de cidade?"
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: "Voc\xEA quis dizer o mais r\xE1pido at\xE9 o momento?"
   - character: {fileID: 11400000, guid: 28eefbffd081ce5408fbc822477e7f5e, type: 2}
-    text: "Ent\xE3o que assim seja. \xC9 HORA DO DUELO."
+    text: Hahahaha. Vamos descobrir isso agora

@@ -18,6 +18,11 @@ public class AI_Enemy : MonoBehaviour{
     float distance;
     private int randomSpotNumber;
 
+    [Header("Quest Settings")]
+    [SerializeField] private bool questEnemy;
+    [SerializeField] private PlayerQuests playerQuests;
+    [SerializeField] private int questIndex;
+
     [Header("General Settings")]
     [SerializeField] private float currentHealth;
     [SerializeField] public float maxHealth = 50;
@@ -239,6 +244,9 @@ public class AI_Enemy : MonoBehaviour{
         currentHealth -= damage;
         healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
         if(currentHealth <= 0){
+            if(questEnemy)
+                playerQuests.questResult[questIndex] = true;
+            
             anim.Play("Dying");
             stateObject.text = "Dead";
             healthBar.gameObject.SetActive(false);
