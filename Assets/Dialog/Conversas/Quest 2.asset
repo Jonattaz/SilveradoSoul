@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3073dcbc0be1647b1f33dd4199e263, type: 3}
+  m_Name: Quest 2
+  m_EditorClassIdentifier: 
+  speakerLeft: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+  speakerRight: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+  lines:
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "HAHAHAHA! Voc\xEA realmente conseguiu! N\xE3o que eu n\xE3o estivesse
+      torcendo por voc\xEA, mas voc\xEA realmente faz jus \xE0 fama que leva Paden."
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: "Chega de conversa Stuart! Sobre o que realmente \xE9 isso? Que \u201Cservi\xE7o\u201D
+      McAllister estava empacando? Em que eu acabei de me meter?"
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Bem, lembra que eu disse que seu pagamento seria generoso? Pois ent\xE3o,
+      ele ser\xE1! S\xF3 preciso de ajuda pra pegar o dinheiro que est\xE1 muito
+      bem guardado dentro do banco. "
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "McAllister e seus homens foram contratados como guarda extra para o banco,
+      que acabou de receber uma nova remessa de moedas. Ent\xE3o meu caro, voc\xEA
+      acaba de nos dar uma boa janela pra saquear esse banco, agora que a guarda
+      est\xE1 manca"
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: "Voc\xEA n\xE3o vale o ar que respira Stuart! Voc\xEA sabia que eu n\xE3o
+      me meteria em algo assim por vontade pr\xF3pria!"
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Ah Paden! Vai querer bancar o bonzinho agora pra quem? Acha que esse cachorro
+      do seu lado liga se o que voc\xEA faz \xE9 certo ou errado? No fim das contas
+      ele quer o mesmo que n\xF3s, uma boa cama e um belo prato de comida e uma garrafa
+      de whisky no fim do dia. E ent\xE3o? Vai ou n\xE3o?"
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: "Depois desse assalto, fa\xE7a um favor e me esque\xE7a!\r"
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Esse \xE9 o Paden que eu gosto! Com raiva! Agora vamos! Vamos aproveitar
+      que eles est\xE3o esperando o bando do McAllister chegar. Hora que souberem
+      que algo aconteceu o Xerife vai correndo pedir ajuda em Tucson e nossa festa
+      acaba."

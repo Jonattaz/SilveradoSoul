@@ -5,6 +5,9 @@ using UnityEngine;
 public class DialogActivator : MonoBehaviour
 {
     [SerializeField] private GameObject DialogDisplay;
+    [SerializeField] private PlayerQuests playerQuests;
+    [SerializeField] private int questNumber;
+    [SerializeField] private bool questDialog;
 
     /// OnTriggerStay is called once per frame for every Collider other that is touching the trigger.
     void OnTriggerStay(Collider other){

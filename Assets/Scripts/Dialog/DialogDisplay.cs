@@ -11,7 +11,10 @@ public class DialogDisplay : MonoBehaviour
     public GameObject speakerRight;
     public GameObject dialogPanel;
     [SerializeField] private bool duelDialog;
+    [SerializeField] private bool questDialog;
+    [SerializeField] private QuestGiver quest;
     [SerializeField] private Teleporting teleportObject;
+    [SerializeField] private bool questStarted;
 
     private SpeakerUI speakerUILeft;
 
@@ -60,6 +63,10 @@ public class DialogDisplay : MonoBehaviour
             
             if(duelDialog){
                 teleportObject.canTeleport = true;
+            }
+
+            if(questDialog){
+                quest.OpenQuestWindow();
             }
 
             activeLineIndex = 0;

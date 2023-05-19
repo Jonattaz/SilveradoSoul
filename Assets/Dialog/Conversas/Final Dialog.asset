@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3073dcbc0be1647b1f33dd4199e263, type: 3}
+  m_Name: Final Dialog
+  m_EditorClassIdentifier: 
+  speakerLeft: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+  speakerRight: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+  lines:
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Vamos! Precisamos ir embora daqui antes que o destacamento de Tucson fique
+      sabendo. Acredito que o Xerife de l\xE1 n\xE3o vai pegar leve com voc\xEA uma
+      segunda vez. Tenho dois conhecidos que t\xEAm um trabalho numa cidade pr\xF3xima
+      de Silverado que adorariam ter 2 pistolas extras. Vai render um bom dinheiro.x"

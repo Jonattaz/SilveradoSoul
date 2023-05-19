@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3073dcbc0be1647b1f33dd4199e263, type: 3}
+  m_Name: Quest 1
+  m_EditorClassIdentifier: 
+  speakerLeft: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+  speakerRight: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+  lines:
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Olha s\xF3 quem o vento trouxe! Pelo jeito o Xerife decidiu n\xE3o te
+      enforcar. Foi o qu\xEA? Bom comportamento? Ha Ha Ha.\r\nE veja! Ainda t\xE1
+      de bab\xE1 do cachorrinho!\r\nVoc\xEA realmente \xE9 um ponto fora da curva
+      Paden."
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: Como vai Stuart?
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Vou bem, vou bem. S\xF3 aquela dor nas costas que n\xE3o me deixa em paz."
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: " E o bando? Est\xE3o com voc\xEA?\r\n"
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: O bando se desfez.
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: " Depois do seu n\xFAmero com esse cachorro passamos 3 dias fugindo de
+      todo um destacamento e decidimos cada um seguir seu rumo."
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Mas voc\xEA chegou em uma hora excelente! \r\nTenho um trabalho para executar
+      e um bom pistoleiro como voc\xEA me viria muito bem a calhar."
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Devo dizer que o pagamento seria generoso, e a julgar pelo seu estado
+      e levando em conta que acabou de sair da pris\xE3o sem um tost\xE3o no bolso
+      e sem lugar pra ir, creio que essa grana te seria muito \xFAtil."
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: "ealmente! N\xE3o vou negar que j\xE1 estive melhor.  Continue, que tipo
+      de trabalho \xE9 esse?"
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Pois bem! Lembra-se do McAllister? Aquele filho da puta que nos roubou
+      e depois tentou armar para que matassem voc\xEA e o Cobb?\r\nFiquei sabendo
+      que o desgra\xE7ado est\xE1 em Calico, uma cidadezinha n\xE3o muito longe daqui.\r\nEle
+      e o bando dele est\xE3o empacando um servi\xE7o que pretendo realizar. E \xE9
+      a\xED meu caro Paden que voc\xEA entra."
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Que tal uma oportunidade de resolver seus pend\xEAncias com o grandioso
+      corno de chifres dourados?"
+  - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
+    text: "Aquele desgra\xE7ado esguio! Faz anos que ficamos sem ouvir o nome do
+      imundo! \r\nEstou dentro Stuart."
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: " \xD3timos! Ha Ha Ha!\r\nConhecendo o homem ele ainda deve usar aquele
+      tosco chap\xE9u com pena vermelha, n\xE3o deve ser dif\xEDcil de ach\xE1-lo
+      na cidade.\r\nTe vejo em breve Paden!\r\nE ah! Tente n\xE3o errar o tiro Ha
+      Ha Ha!"
