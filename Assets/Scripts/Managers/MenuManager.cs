@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour{
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject configurationPanel;
     [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private GameObject creditsPanel;
     [SerializeField] private AudioMixer musicAudioMixer;
     [SerializeField] private AudioMixer fxAudioMixer;
 
@@ -27,8 +28,18 @@ public class MenuManager : MonoBehaviour{
         controlsPanel.SetActive(true);
     }
 
+     public void OpenCredits(){
+        menuPanel.SetActive(false);
+        creditsPanel.SetActive(true);
+    }
+
     public void CloseOptions(){
         configurationPanel.SetActive(false);
+        menuPanel.SetActive(true);
+    }
+
+     public void CloseCredits(){
+        creditsPanel.SetActive(false);
         menuPanel.SetActive(true);
     }
 
