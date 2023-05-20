@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class DialogDisplay : MonoBehaviour
@@ -15,6 +16,9 @@ public class DialogDisplay : MonoBehaviour
     [SerializeField] private QuestGiver quest;
     [SerializeField] private Teleporting teleportObject;
     [SerializeField] private bool questStarted;
+    [SerializeField] private bool finalDialog;
+    [SerializeField] private string menuScene;
+
 
     private SpeakerUI speakerUILeft;
 
@@ -40,7 +44,6 @@ public class DialogDisplay : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F)) 
         {
             AdvanceConversation();
-        
         }
            
     }
@@ -68,6 +71,14 @@ public class DialogDisplay : MonoBehaviour
             if(questDialog){
                 quest.OpenQuestWindow();
             }
+
+            if(finalDialog){
+                if(menuScene != ""){
+                    Time.timeScale = 1;
+				    SceneManager.LoadScene(menuScene, LoadSceneMode.Single);
+			    }
+            }
+
 
             activeLineIndex = 0;
              // Bool that inform if the player is talking = false

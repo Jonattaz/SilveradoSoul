@@ -18,5 +18,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
     text: "Vamos! Precisamos ir embora daqui antes que o destacamento de Tucson fique
       sabendo. Acredito que o Xerife de l\xE1 n\xE3o vai pegar leve com voc\xEA uma
-      segunda vez. Tenho dois conhecidos que t\xEAm um trabalho numa cidade pr\xF3xima
-      de Silverado que adorariam ter 2 pistolas extras. Vai render um bom dinheiro.x"
+      segunda vez. "
+  - character: {fileID: 11400000, guid: 7d6156dc437db214cb1c88f0feb1dace, type: 2}
+    text: "Tenho dois conhecidos que t\xEAm um trabalho numa cidade pr\xF3xima de
+      Silverado que adorariam ter 2 pistolas extras. Vai render um bom dinheiro."

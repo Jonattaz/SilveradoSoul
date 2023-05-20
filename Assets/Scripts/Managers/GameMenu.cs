@@ -18,7 +18,6 @@ public class GameMenu : MonoBehaviour
         [SerializeField] private SlowMotion slowMotionMech;
         [SerializeField] private string menuScene;
         [SerializeField] private string reloadScene;
-        [SerializeField] private bool deadInfo; 
 
         [SerializeField] private bool isPaused;
         [SerializeField] private KeyCode menuButton;
@@ -33,7 +32,7 @@ public class GameMenu : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-            if(deadInfo){
+            if(character.dead){
                 PlayerDead();
             }else{
                 MenuActivator();

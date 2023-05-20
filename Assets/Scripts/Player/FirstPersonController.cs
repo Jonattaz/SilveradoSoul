@@ -13,6 +13,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class FirstPersonController : MonoBehaviour
     {
         public bool canMove;
+        public bool dead;
         [SerializeField] private float currentHealth;
         [SerializeField] private float maxHealth;
         [SerializeField] private LeaningController leanSystem;
@@ -113,7 +114,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             currentHealth -= damage;
             playerHealthBar.SetHealthBarPercentage(currentHealth / maxHealth);
             if(currentHealth <= 0){
-                Debug.Log("Dead");
+                dead = true;
                 canMove = false;
                 leanSystem.enabled = false;
                 weaponControllerSystem.enabled = false;
