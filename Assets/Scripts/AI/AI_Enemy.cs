@@ -47,6 +47,7 @@ public class AI_Enemy : MonoBehaviour{
     [SerializeField] private float shootingDistance;
     [SerializeField] private float fireRate = 1.5f;
     [SerializeField] private int gunDamage = 10;
+    [SerializeField] private int duelGunDamage;
     [SerializeField] private int randomNumber;
     [SerializeField] private TrailRenderer bulletTrail;
     [HideInInspector] public bool duelingMode;
@@ -85,7 +86,7 @@ public class AI_Enemy : MonoBehaviour{
         
         if(duelingMode){
             transform.LookAt(playerPositionReference);
-            gunDamage = 50;
+            gunDamage = duelGunDamage;
         }
 
        

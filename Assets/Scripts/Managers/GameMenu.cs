@@ -32,11 +32,13 @@ public class GameMenu : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-            if(character.dead){
-                PlayerDead();
-            }else{
-                MenuActivator();
-            }  
+            if(character != null){
+                if(character.dead){
+                    PlayerDead();
+                }else{
+                    MenuActivator();
+                }  
+            }
         }
 
         private void MenuActivator(){
