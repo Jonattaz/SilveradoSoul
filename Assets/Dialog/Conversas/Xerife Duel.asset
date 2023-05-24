@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3073dcbc0be1647b1f33dd4199e263, type: 3}
+  m_Name: Xerife Duel
+  m_EditorClassIdentifier: 
+  speakerLeft: {fileID: 11400000, guid: 41ac27c3c49146644b7235bf95212233, type: 2}
+  speakerRight: {fileID: 11400000, guid: 41ac27c3c49146644b7235bf95212233, type: 2}
+  lines:
+  - character: {fileID: 11400000, guid: 41ac27c3c49146644b7235bf95212233, type: 2}
+    text: "Essa loucura acaba agora! Quem voc\xEA pensa que \xE9 pra entrar na MINHA
+      cidade! Matar MEUS homens! E fugir com MEU dinheiro? Depois de te enforcar
+      vou te atirar aos lobos seu verme!"
