@@ -21,6 +21,7 @@ public class GameMenu : MonoBehaviour
 
         [SerializeField] private bool isPaused;
         [SerializeField] private KeyCode menuButton;
+        [SerializeField] private bool unlockMouse;
         public static GameMenu gameMenuInstance;
 
         void Start(){
@@ -28,6 +29,7 @@ public class GameMenu : MonoBehaviour
             gameMenuInstance = this;
             Time.timeScale = 1;
         }
+
 
         // Update is called once per frame
         void Update()
@@ -38,6 +40,10 @@ public class GameMenu : MonoBehaviour
                 }else{
                     MenuActivator();
                 }  
+            }
+            if(unlockMouse && !Cursor.visible){
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
 
