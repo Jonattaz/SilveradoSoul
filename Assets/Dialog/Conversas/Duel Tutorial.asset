@@ -16,8 +16,9 @@ MonoBehaviour:
   speakerRight: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
   lines:
   - character: {fileID: 11400000, guid: 28eefbffd081ce5408fbc822477e7f5e, type: 2}
-    text: "Quer testar a sua sorte contra o gatilho mais r\xE1pido da cidade?"
+    text: "Quer testar a sua sorte em um duelo contra o gatilho mais r\xE1pido da
+      cidade?"
   - character: {fileID: 11400000, guid: c6cbe350f9ac1f84da4defb612430c50, type: 2}
     text: "Voc\xEA quis dizer o mais r\xE1pido at\xE9 o momento?"
   - character: {fileID: 11400000, guid: 28eefbffd081ce5408fbc822477e7f5e, type: 2}
-    text: Hahahaha. Vamos descobrir isso agora
+    text: Hahahaha. Vamos descobrir isso agora!
