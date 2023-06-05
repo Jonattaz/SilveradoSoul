@@ -34,6 +34,9 @@ public class Teleporting : MonoBehaviour
             player.GetComponent<FirstPersonController>().duelMode = true;
             leaningMech.enabled = false;
             crouchMech.enabled = false;
+            
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             enemy.gameObject.SetActive(true);
             enemy.GetComponent<AI_Enemy>().duelingMode = true;
@@ -62,6 +65,9 @@ public class Teleporting : MonoBehaviour
         dialogObject.SetActive(false);
         dialogActivator.SetActive(false);
         duelCounter.canCount = true;
-        boxCollider.enabled = false;        
+        boxCollider.enabled = false;    
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;        
     }
 }

@@ -46,6 +46,10 @@
                     time = 1f;
                     direction = -1;
                 }
+
+                
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                     
             }
         }

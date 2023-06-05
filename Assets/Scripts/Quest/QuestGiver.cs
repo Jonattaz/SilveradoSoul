@@ -14,6 +14,7 @@ public class QuestGiver : MonoBehaviour
     public Text description;
     public bool completed = false;
     public bool canSpawnEnemies;
+    public bool deactivator;
 
     [HideInInspector]
     public bool localActive;
@@ -21,15 +22,26 @@ public class QuestGiver : MonoBehaviour
     public int questIndex;
     
     public GameObject enemies;
-
+    
     private void Awake() {
         instance = this;
     }
 
     /// Update is called every frame, if the MonoBehaviour is enabled.
     void Update(){
-        if(canSpawnEnemies)
+        if(canSpawnEnemies){
             enemies.SetActive(true);
+        }
+
+        if(playerQuests.questResult[0] && !deactivator){
+            CompleteFirstQuest();
+        }
+
+        if(playerQuests.questResult[1]){
+            CompleteSecondQuest();
+        }
+
+
     }
 
     public void OpenQuestWindow(){
@@ -49,17 +61,25 @@ public class QuestGiver : MonoBehaviour
        completed = true;
        yield return new WaitForSeconds(3);
         if(playerQuests.questResult[questIndex]){
-            CompleteQuest();
+            
         }
     }
 
-    public void CompleteQuest(){ 
-        Debug.Log("Ué");
-        questWindow.SetActive(false);
-        quest.isActive = false;
-        title.text = "";
-        description.text = "";
-        localActive = quest.isActive;
-        Destroy(this.gameObject);
+    public void CompleteFirstQuest(){ 
+        //questWindow.SetActive(false);
+        //quest.isActive = false;
+        description.text = "Retorne à cidade de Bodie e informe ao Stuart.";
+        //localActive = quest.isActive;
+        //Destroy(this.gameObject);
+        deactivator = true;
     }
+
+       public void CompleteSecondQuest(){ 
+        questWindow.SetActive(false);
+        //quest.isActive = false;
+        description.text = "Converse com Stuart e prepare-se para fugir.";
+        //localActive = quest.isActive;
+        //Destroy(this.gameObject);
+    }
+
 }

@@ -38,6 +38,9 @@ using UnityStandardAssets.Characters.FirstPerson;
 
         // TimerController
         void CountDownController(){
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+                
             countDownText.gameObject.SetActive(true);
             warningMessage.gameObject.SetActive(true);
         
@@ -58,6 +61,9 @@ using UnityStandardAssets.Characters.FirstPerson;
                 crouchMech.enabled = true;
                 weaponControlMech.duelMode = false;
 
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                
                 enemy.GetComponent<AI_Enemy>().nav.enabled = true;
                 enemy.duelingMode = false;
                 canCount = false;

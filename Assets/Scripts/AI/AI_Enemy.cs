@@ -245,8 +245,9 @@ public class AI_Enemy : MonoBehaviour{
         currentHealth -= damage;
         healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
         if(currentHealth <= 0){
-            if(questEnemy)
+            if(questEnemy){
                 playerQuests.questResult[questIndex] = true;
+            }
             
             anim.Play("Dying");
             stateObject.text = "Dead";
