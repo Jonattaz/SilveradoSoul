@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3480,7 +3480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Programa\xE7\xE3o e Anima\xE7\xE3o"
+  m_text: Programacao e Animacao
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
@@ -6774,7 +6774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Come\xE7ar\n"
+  m_text: Comecar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
@@ -7193,7 +7193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Op\xE7\xF5es"
+  m_text: Opcoes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
@@ -7513,7 +7513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cr\xE9ditos"
+  m_text: Creditos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
@@ -8776,7 +8776,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "UX|UI e Texturiza\xE7\xE3o"
+  m_text: UX|UI e Texturizacao
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
@@ -9118,7 +9118,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Aux\xEDlio Geral"
+  m_text: Auxilio Geral
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
@@ -9252,7 +9252,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cr\xE9ditos"
+  m_text: Creditos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
@@ -9519,7 +9519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dire\xE7\xE3o de Arte e Narrativa"
+  m_text: Direcao de Arte e Narrativa
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
   m_sharedMaterial: {fileID: -7424842572879813975, guid: 5caf9c13d7c410a439b8b5c1e11485bb, type: 2}
